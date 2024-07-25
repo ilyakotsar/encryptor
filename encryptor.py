@@ -79,8 +79,15 @@ def get_settings() -> dict:
         return json.load(f)
 
 
-def create_symm_config(settings: dict, salt: bytes, iv: bytes, ciphertext: str) -> str:
-    config = [str(settings['argon2'][i]) for i in settings['argon2']]
+def create_symm_config(
+        time_cost: int,
+        memory_cost: int,
+        parallelism: int,
+        salt: bytes,
+        iv: bytes,
+        ciphertext: str,
+    ) -> str:
+    config = [str(i) for i in (time_cost, memory_cost, parallelism)]
     config.extend([b64encode(i).decode() for i in (salt, iv)])
     config.append(ciphertext)
     return '|'.join(config)
@@ -99,12 +106,18 @@ def symm_config_str_to_dict(config: str) -> dict:
     return config_dict
 
 
-def create_asymm_config(g: int, p: int, public_key: int, salt: bytes) -> str:
-    with open('settings.json') as f:
-        settings = json.load(f)
+def create_asymm_config(
+        time_cost: int,
+        memory_cost: int,
+        parallelism: int,
+        g: int,
+        p: int,
+        public_key: int,
+        salt: bytes,
+    ) -> str:
     config = ['A']
     config.extend([str(i) for i in (g, p, public_key)])
-    config.extend([str(settings['argon2'][i]) for i in settings['argon2']])
+    config.extend([str(i) for i in (time_cost, memory_cost, parallelism)])
     config.append(b64encode(salt).decode())
     return '|'.join(config)
 

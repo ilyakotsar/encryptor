@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="max-w-xl mx-auto border border-zinc-900 rounded-lg p-5 my-5">
+	<div class="mb-5">
+		<div class="flex justify-between mb-0.5">
+			<label for="plaintext" class="cursor-pointer">Plaintext</label>
+			<button onclick="copy(this, 'plaintext')" type="button" class="p-1 rounded text-zinc-500 hover:text-white hover:bg-zinc-800 focus:bg-zinc-800 transition outline-none" title="Copy">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg>
+			</button>
+		</div>
+		<textarea id="plaintext" rows="4" class="bg-inherit px-3 py-1.5 rounded w-full border-2 border-zinc-800 hover:bg-black focus:bg-black focus:border-blue-500 transition outline-none" autocomplete="off"></textarea>
+	</div>
+	<div class="flex flex-wrap justify-center gap-3 mb-5">
+		<div>
+			<div class="mb-0.5">
+				<label for="time_cost" class="cursor-pointer">Time cost: <span id="time_cost_display">3</span></label>
+			</div>
+			<input type="range" oninput="setValue(this)" id="time_cost" class="w-32 cursor-pointer outline-none" min="1" max="10" value="3" step="1" autocomplete="off">
+		</div>
+		<div>
+			<div class="mb-0.5">
+				<label for="memory_cost" class="cursor-pointer">Memory cost: <span id="memory_cost_display">65536</span></label>
+			</div>
+			<input type="range" oninput="setValue(this)" id="memory_cost" class="w-52 cursor-pointer outline-none" min="65536" max="200000" value="65536" step="1" autocomplete="off">
+		</div>
+		<div>
+			<div class="mb-0.5">
+				<label for="parallelism" class="cursor-pointer">Parallelism: <span id="parallelism_display">4</span></label>
+			</div>
+			<input type="range" oninput="setValue(this)" id="parallelism" class="w-32 cursor-pointer outline-none" min="1" max="10" value="4" step="1" autocomplete="off">
+		</div>
+	</div>
+	<div class="border-y border-zinc-900 py-5 mb-5">
+		<div class="mb-5">
+			<div class="mb-0.5">
+				<label for="password" class="cursor-pointer">Password</label>
+			</div>
+			<input type="password" id="password" class="bg-inherit px-3 py-1.5 rounded w-full border-2 border-zinc-800 hover:bg-black focus:bg-black focus:border-blue-500 transition outline-none">
+		</div>
+		<div class="flex flex-wrap justify-evenly gap-2">
+			<button type="button" onclick="symmetric_encrypt()" class="flex items-center ps-4 pe-3 py-1.5 rounded border-2 border-transparent bg-emerald-950 hover:bg-emerald-900 focus:border-emerald-400 transition outline-none">
+				<span class="me-1 mb-0.5">Encrypt</span>
+				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="text-emerald-500" fill="currentColor"><path d="m18.707 12.707-1.414-1.414L13 15.586V6h-2v9.586l-4.293-4.293-1.414 1.414L12 19.414z"></path></svg>
+			</button>
+			<button type="button" onclick="symmetric_decrypt()" class="flex items-center ps-4 pe-3 py-1.5 rounded border-2 border-transparent bg-rose-950 hover:bg-rose-900 focus:border-rose-400 transition outline-none">
+				<span class="me-1 mb-0.5">Decrypt</span>
+				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="text-rose-500" fill="currentColor"><path d="M11 8.414V18h2V8.414l4.293 4.293 1.414-1.414L12 4.586l-6.707 6.707 1.414 1.414z"></path></svg>
+			</button>
+		</div>
+	</div>
+	<div>
+		<div class="flex justify-between mb-0.5">
+			<label for="encrypted_message" class="cursor-pointer">Encrypted message</label>
+			<button onclick="copy(this, 'encrypted_message')" type="button" class="p-1 rounded text-zinc-500 hover:text-white hover:bg-zinc-800 focus:bg-zinc-800 transition outline-none" title="Copy">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg>
+			</button>
+		</div>
+		<textarea id="encrypted_message" rows="4" class="bg-inherit px-3 py-1.5 rounded w-full border-2 border-zinc-800 hover:bg-black focus:bg-black focus:border-blue-500 transition outline-none break-all" autocomplete="off"></textarea>
+	</div>
+</div>
+{% endblock %}
