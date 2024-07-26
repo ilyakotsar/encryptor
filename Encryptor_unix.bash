@@ -1,0 +1,1 @@
+flask --app gui_app run

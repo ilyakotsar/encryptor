@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.append(os.path.abspath(os.pardir))
-
 import encryptor
 import json
 from flask import Flask, request, render_template, jsonify
