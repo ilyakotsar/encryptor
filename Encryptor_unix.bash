@@ -1,1 +1,1 @@
-flask --app gui_app run
+flask --app src/encryptor run
